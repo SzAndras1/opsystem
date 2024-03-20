@@ -1,0 +1,58 @@
+# API Template to extend when a service is created based on this archetype.
+# Do not create a new .yml file next to this, rather use this as the main descriptor.
+
+openapi: "3.0.3"
+info:
+  version: 1.0.0
+  title: Microservice
+
+servers:
+  - url: http://localhost:8081
+
+paths:
+
+# ==============================================================================
+# User
+# ==============================================================================
+
+  /api/v1/user:
+    post:
+      tags:
+        - user
+      operationId: createUser
+      description: Create a User
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: '#/components/schemas/UserDto'
+        required: true
+      responses:
+        201:
+          description: The created User
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDto'
+
+components:
+  schemas:
+    UserDto:
+      properties:
+        id:
+          type: integer
+          format: int64
+        username:
+          type: string
+        currentWallpaperIndex:
+          type: integer
+          format: int32
+        wallpapers:
+          type: array
+          items:
+            type: string
+        role:
+          enum:
+            - PARENT
+            - CHILD
+
