@@ -1,0 +1,16 @@
+<form [formGroup]="userForm" (ngSubmit)="createUser()">
+  <mat-form-field appearance="fill" class="ad-form">
+    <mat-label>Username</mat-label>
+    <input matInput formControlName="username">
+    @if (userForm.controls['username'].hasError('required')) {
+      <mat-error>You must enter a value</mat-error>
+    }
+    @if (userForm.controls['username'].hasError('minlength')) {
+      <mat-error>Must be at least 3 characters</mat-error>
+    }
+    @if (userForm.controls['username'].hasError('maxlength')) {
+      <mat-error>Maximum 30 characters</mat-error>
+    }
+  </mat-form-field>
+  <button type="submit" [disabled]="userForm.status == 'INVALID'" color="accent" mat-raised-button>Submit</button>
+</form>
