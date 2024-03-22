@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "usertable")
+@Table(name = "user_table")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_USER_TABLE")
@@ -29,5 +29,12 @@ public class User {
     @ElementCollection
     @CollectionTable(name = "user_wallpaper", joinColumns = @JoinColumn(name = "id"))
     @Column(name = "wallpaper")
-    private List<String> wallpaper;
+    private List<String> wallpapers;
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_application",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "app_id"))
+    List<Application> applications;
 }
