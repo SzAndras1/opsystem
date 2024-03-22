@@ -20,7 +20,7 @@ public class UserAppService {
 
     private final UserMapper userMapper;
 
-    public UserDto connect(UserDto userDto, Long appId) {
+    public UserDto connectUserWithApp(UserDto userDto, Long appId) {
         User user = userRepository.findById(userDto.getId()).orElseThrow(EntityNotFoundException::new);
         Application application = applicationRepository.findById(appId).orElseThrow(EntityNotFoundException::new);
 

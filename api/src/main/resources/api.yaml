@@ -15,7 +15,7 @@ paths:
 # User
 # ==============================================================================
 
-  /api/v1/user:
+  /api/v1/users:
     post:
       tags:
         - user
@@ -25,7 +25,7 @@ paths:
         content:
           application/json;charset=UTF-8:
             schema:
-              $ref: '#/components/schemas/UserDto'
+              $ref: '#/components/schemas/CreateUserDto'
         required: true
       responses:
         201:
@@ -48,13 +48,49 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/UserDto'
+    put:
+      tags:
+        - user
+      operationId: updateUser
+      description: Update a User
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: '#/components/schemas/UserDto'
+        required: true
+      responses:
+        200:
+          description: The updated User
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDto'
+    delete:
+      tags:
+        - user
+      operationId: deleteUser
+      description: Delete a User
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: '#/components/schemas/UserDto'
+        required: true
+      responses:
+        200:
+          description: The deleted User
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDto'
 
-  /api/v1/user/install/{appId}:
+  /api/v1/users/install/{appId}:
     post:
       tags:
         - user
       operationId: install
-      description: Install an Applcation to a User
+      description: Install an Application to a User
       parameters:
         - name: appId
           in: path
@@ -77,11 +113,40 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserDto'
 
+  /api/v1/users/create-child/{userId}:
+    post:
+      tags:
+        - user
+      operationId: createChild
+      description: Create a child User
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: Id of the Application
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: '#/components/schemas/CreateUserDto'
+        required: true
+      responses:
+        201:
+          description: The created User
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDto'
+
+
 # ==============================================================================
 # Application
 # ==============================================================================
 
-  /api/v1/application:
+  /api/v1/applications:
     post:
       tags:
         - application
@@ -147,4 +212,12 @@ components:
           format: int64
         name:
           type: string
+
+    CreateUserDto:
+      required:
+        - username
+      properties:
+        username:
+          type: string
+
 

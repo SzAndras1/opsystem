@@ -1,6 +1,7 @@
 package hu.personal.opsystem.controller;
 
 import hu.personal.opsystem.UserApi;
+import hu.personal.opsystem.model.CreateUserDto;
 import hu.personal.opsystem.model.UserDto;
 import hu.personal.opsystem.service.UserAppService;
 import hu.personal.opsystem.service.UserService;
@@ -22,8 +23,8 @@ public class UserController implements UserApi {
     private final UserAppService userAppService;
 
     @Override
-    public ResponseEntity<UserDto> createUser(UserDto userDto) {
-        UserDto savedUserDto = userService.createUser(userDto);
+    public ResponseEntity<UserDto> createUser(CreateUserDto createUserDtouserDto) {
+        UserDto savedUserDto = userService.createUser(createUserDtouserDto);
 
         URI location = ServletUriComponentsBuilder
                 .fromPath(USER_API_PATH)
@@ -41,6 +42,21 @@ public class UserController implements UserApi {
 
     @Override
     public ResponseEntity<UserDto> install(Long appId, UserDto userDto) {
-        return ResponseEntity.ok(userAppService.connect(userDto, appId));
+        return ResponseEntity.ok(userAppService.connectUserWithApp(userDto, appId));
+    }
+
+    @Override
+    public ResponseEntity<UserDto> createChild(Long appId, CreateUserDto createUserDto) {
+        return ResponseEntity.ok(userService.createChild(createUserDto, appId));
+    }
+
+    @Override
+    public ResponseEntity<UserDto> updateUser(UserDto userDto) {
+        return ResponseEntity.ok(userService.updateUser(userDto));
+    }
+
+    @Override
+    public ResponseEntity<UserDto> deleteUser(UserDto userDto) {
+        return ResponseEntity.ok(userService.deleteUser(userDto));
     }
 }
