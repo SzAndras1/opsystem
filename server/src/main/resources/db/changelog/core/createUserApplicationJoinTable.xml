@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet id="create_user_application_join_table" author="andras.szabo">
+        <createTable tableName="user_application">
+            <column name="app_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="create_user_application_application_fk" author="andras.szabo">
+        <addForeignKeyConstraint baseColumnNames="app_id" baseTableName="user_application"
+                                 constraintName="fk_use_on_application" referencedColumnNames="id"
+                                 referencedTableName="application"/>
+    </changeSet>
+    <changeSet id="create_user_application_user_fk" author="andras.szabo">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_application"
+                                 constraintName="fk_use_on_user" referencedColumnNames="id"
+                                 referencedTableName="user_table"/>
+    </changeSet>
+</databaseChangeLog>

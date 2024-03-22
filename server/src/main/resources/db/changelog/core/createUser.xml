@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet id="table_user_seq_create" author="andras.szabo">
+        <createSequence cycle="false" incrementBy="1" sequenceName="SEQ_USER_TABLE" startValue="6"/>
+    </changeSet>
+    <changeSet id="create_user_table" author="andras.szabo">
+        <createTable tableName="user_table">
+            <column name="id" type="bigint" defaultValueComputed="nextval('SEQ_USER_TABLE')">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="username" type="varchar(255)"/>
+            <column name="role" type="varchar(255)"/>
+            <column name="current_wallpaper_index" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="create_user_wallpaper_table" author="andras.szabo">
+        <createTable tableName="user_wallpaper">
+            <column name="id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="wallpaper" type="varchar(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="create_user_wallpaper_fk" author="andras.szabo">
+        <addForeignKeyConstraint baseColumnNames="id" baseTableName="user_wallpaper"
+                                 constraintName="fk_user_wallpaper_on_user" referencedColumnNames="id"
+                                 referencedTableName="user_table"/>
+    </changeSet>
+</databaseChangeLog>
