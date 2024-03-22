@@ -18,7 +18,7 @@ public class Application {
     @SequenceGenerator(name = "SEQ_APPLICATION_TABLE", sequenceName = "SEQ_APPLICATION_TABLE", allocationSize = 1, initialValue = 5)
     private Long id;
 
-    private String username;
+    private String name;
 
     @ManyToMany(mappedBy = "applications")
     List<User> users;

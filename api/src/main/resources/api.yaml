@@ -34,6 +34,86 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserDto'
+    get:
+      tags:
+        - user
+      operationId: getAllUser
+      description: get all existing User
+      responses:
+        200:
+          description: List of Users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserDto'
+
+  /api/v1/user/install/{appId}:
+    post:
+      tags:
+        - user
+      operationId: install
+      description: Install an Applcation to a User
+      parameters:
+        - name: appId
+          in: path
+          required: true
+          description: Id of the Application
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: '#/components/schemas/UserDto'
+        required: true
+      responses:
+        200:
+          description: The User
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDto'
+
+# ==============================================================================
+# Application
+# ==============================================================================
+
+  /api/v1/application:
+    post:
+      tags:
+        - application
+      operationId: createApplication
+      description: Create an Application
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: '#/components/schemas/ApplicationDto'
+        required: true
+      responses:
+        201:
+          description: The created Application
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationDto'
+    get:
+      tags:
+        - application
+      operationId: getAllApplication
+      description: get all existing Application
+      responses:
+        200:
+          description: List of Applications
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ApplicationDto'
 
 components:
   schemas:
@@ -51,6 +131,10 @@ components:
           type: array
           items:
             type: string
+        applications:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationDto'
         role:
           enum:
             - PARENT
@@ -61,6 +145,6 @@ components:
         id:
           type: integer
           format: int64
-        username:
+        name:
           type: string
 
