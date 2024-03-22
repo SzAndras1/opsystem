@@ -1,1 +1,18 @@
-<p>application-list works!</p>
+<div class="grid-list">
+  @for (app of applications; track app.id; let index = $index) {
+    <mat-card class="card">
+      <mat-card-content>
+        <div class="name-div">{{app.name}}</div>
+        <div>
+          @if (!isAppInstalled[index]) {
+            <button mat-raised-button color="accent" (click)="installApp(app.id!)">Install</button>
+          }
+          @else {
+            <button mat-raised-button color="warn" (click)="viewApp(app.id!)">View</button>
+          }
+        </div>
+      </mat-card-content>
+    </mat-card>
+  }
+</div>
+

@@ -35,7 +35,6 @@ export class UserCreateComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("initel")
     this.authenticateService.subjectIsLoggedIn.subscribe((value: boolean) => this.isLogged = value);
     this.authenticateService.currentUser.subscribe((userDto: UserDto) => this.parentId = userDto.id!);
     this.userForm = this.fb.group({

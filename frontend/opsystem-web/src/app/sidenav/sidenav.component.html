@@ -11,9 +11,32 @@
       </mat-toolbar-row>
     </mat-toolbar>
 
+    @if (!isLogged) {
+      <mat-nav-list>
+        <a mat-list-item routerLink="create-user">
+          <div>Create an Account</div>
+        </a>
+       </mat-nav-list>
+    }
+
     <mat-nav-list>
-      <a mat-list-item routerLink="create">
+      <a mat-list-item routerLink="create-user">
         <div>Create a Child</div>
+      </a>
+    </mat-nav-list>
+    <mat-nav-list>
+      <a mat-list-item routerLink="apps">
+        <div>Browse apps</div>
+      </a>
+    </mat-nav-list>
+    <mat-nav-list>
+      <a mat-list-item routerLink="installed">
+        <div>Installed apps</div>
+      </a>
+    </mat-nav-list>
+    <mat-nav-list>
+      <a mat-list-item routerLink="create-app">
+        <div>Create app</div>
       </a>
     </mat-nav-list>
   </mat-sidenav>
@@ -34,4 +57,3 @@
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
-
