@@ -64,4 +64,13 @@ export class ApplicationListComponent implements OnInit {
   viewApp(appId: number): void {
     this.router.navigate([`/app/${appId}`])
   }
+
+  uninstall(item: ApplicationDto, index: number): void {
+    this.currentUser.applications = this.currentUser.applications!.filter(i => i.id != item.id);
+    this.userService.updateUser(this.currentUser).subscribe((userDto: UserDto) => {
+      console.log(this.currentUser);
+      this.authenticateService.currentUser.next(userDto);
+      this.isAppInstalled[index] = false;
+    });
+  }
 }

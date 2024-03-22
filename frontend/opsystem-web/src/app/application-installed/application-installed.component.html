@@ -3,16 +3,11 @@
     <mat-card class="app-card">
       <mat-card-content class="app-card-content">
         <div class="app-name-div">{{app.name}}</div>
-        <div>
-          @if (!isAppInstalled[index]) {
-            <button mat-raised-button color="accent" (click)="installApp(app.id!)">Install</button>
-          }
-          @else {
+         <div>
             <button class="view-button" mat-raised-button color="accent" (click)="viewApp(app.id!)">View</button>
-            <button mat-raised-button color="warn" (click)="uninstall(app, index)">Delete</button>
-          }
-        </div>
-      </mat-card-content>
+            <button mat-raised-button color="warn" (click)="uninstall(index)">Delete</button>
+          </div>
+        </mat-card-content>
     </mat-card>
   }
 </div>
