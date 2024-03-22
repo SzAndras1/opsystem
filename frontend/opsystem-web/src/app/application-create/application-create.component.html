@@ -1,1 +1,18 @@
-<p>application-create works!</p>
+<form [formGroup]="appForm" (ngSubmit)="createApp()">
+  <mat-form-field appearance="fill" class="ad-form">
+    <mat-label>Name of the Application</mat-label>
+    <input matInput formControlName="name">
+    @if (appForm.controls['name'].hasError('required')) {
+    <mat-error>You must enter a value</mat-error>
+    }
+    @if (appForm.controls['name'].hasError('minlength')) {
+    <mat-error>Must be at least 3 characters</mat-error>
+    }
+    @if (appForm.controls['name'].hasError('maxlength')) {
+    <mat-error>Maximum 30 characters</mat-error>
+    }
+  </mat-form-field>
+  <div>
+    <button type="submit" [disabled]="appForm.status == 'INVALID'" color="accent" mat-raised-button>Submit</button>
+  </div>
+</form>
