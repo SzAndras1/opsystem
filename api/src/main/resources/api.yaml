@@ -180,6 +180,28 @@ paths:
                 items:
                   $ref: '#/components/schemas/ApplicationDto'
 
+  /api/v1/applications/{appId}:
+    get:
+      tags:
+        - application
+      operationId: getApplication
+      description: Get the Application by the corresponding id
+      parameters:
+        - name: appId
+          in: path
+          required: true
+          description: Id of the Application
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: ApplicationDto
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/ApplicationDto'
+
 components:
   schemas:
     UserDto:

@@ -35,4 +35,9 @@ public class ApplicationController implements ApplicationApi {
     public ResponseEntity<List<ApplicationDto>> getAllApplication() {
         return ResponseEntity.ok(applicationService.getAll());
     }
+
+    @Override
+    public ResponseEntity<ApplicationDto> getApplication(Long appId) {
+        return ResponseEntity.ok(applicationService.getApplication(appId));
+    }
 }

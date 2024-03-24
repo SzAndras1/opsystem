@@ -7,6 +7,7 @@ import hu.personal.opsystem.repository.ApplicationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityExistsException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,5 +28,9 @@ public class ApplicationService {
     public ApplicationDto createApp(ApplicationDto applicationDto) {
         Application savedApplication = applicationMapper.toEntity(applicationDto);
         return applicationMapper.toDto(applicationRepository.save(savedApplication));
+    }
+
+    public ApplicationDto getApplication(Long appId) {
+        return applicationMapper.toDto(applicationRepository.findById(appId).orElseThrow(EntityExistsException::new));
     }
 }
