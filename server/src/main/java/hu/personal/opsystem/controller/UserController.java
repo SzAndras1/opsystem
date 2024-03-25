@@ -36,9 +36,14 @@ public class UserController implements UserApi {
         return ResponseEntity.created(location).body(savedUserDto);
     }
 
-    @GetMapping("api/v1/user")
+    @Override
     public ResponseEntity<List<UserDto>> getAllUser() {
         return ResponseEntity.ok(userService.getAll());
+    }
+
+    @Override
+    public ResponseEntity<UserDto> getUser(UUID userId) {
+        return ResponseEntity.ok(userService.getUserById(userId));
     }
 
     @Override

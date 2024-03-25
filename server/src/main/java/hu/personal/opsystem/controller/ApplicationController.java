@@ -41,4 +41,9 @@ public class ApplicationController implements ApplicationApi {
     public ResponseEntity<ApplicationDto> getApplication(UUID appId) {
         return ResponseEntity.ok(applicationService.getApplication(appId));
     }
+
+    @Override
+    public ResponseEntity<ApplicationDto> updateApplication(ApplicationDto applicationDto) {
+        return ResponseEntity.ok(applicationService.updateApplication(applicationDto));
+    }
 }

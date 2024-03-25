@@ -68,6 +68,26 @@ paths:
                 $ref: '#/components/schemas/UserDto'
 
   /api/v1/users/{userId}:
+    get:
+      tags:
+        - user
+      operationId: getUser
+      description: Get the User by the corresponding id
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: Id of the User
+          schema:
+            type: string
+            format: uuid
+      responses:
+        200:
+          description: The User
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDto'
     delete:
       tags:
         - user
@@ -173,7 +193,7 @@ paths:
       tags:
         - application
       operationId: getAllApplication
-      description: get all existing Application
+      description: Get all existing Application
       responses:
         200:
           description: List of Applications
@@ -183,6 +203,23 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ApplicationDto'
+    put:
+      tags:
+        - application
+      operationId: updateApplication
+      description: Update the Application
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: '#/components/schemas/ApplicationDto'
+      responses:
+        200:
+          description: ApplicationDto
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationDto'
 
   /api/v1/applications/{appId}:
     get:

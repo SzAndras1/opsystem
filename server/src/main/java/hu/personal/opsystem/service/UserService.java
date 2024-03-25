@@ -28,6 +28,10 @@ public class UserService {
         return userMapper.toDto(userRepository.save(savedUser));
     }
 
+    public UserDto getUserById(UUID userId) {
+        return this.userMapper.toDto(this.userRepository.findById(userId).orElseThrow(EntityNotFoundException::new));
+    }
+
     public List<UserDto> getAll() {
         return userRepository.findAll().stream()
                 .map(userMapper::toDto)

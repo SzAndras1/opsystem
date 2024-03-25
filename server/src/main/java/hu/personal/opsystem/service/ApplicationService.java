@@ -34,4 +34,9 @@ public class ApplicationService {
     public ApplicationDto getApplication(UUID appId) {
         return applicationMapper.toDto(applicationRepository.findById(appId).orElseThrow(EntityExistsException::new));
     }
+
+    public ApplicationDto updateApplication(ApplicationDto applicationDto) {
+        Application savedApplication = applicationMapper.toEntity(applicationDto);
+        return applicationMapper.toDto(applicationRepository.save(savedApplication));
+    }
 }
