@@ -86,14 +86,14 @@ export class SidenavComponent implements OnInit {
     this._snackBar.open(message, buttonLabel, {duration: 3 * 1000, verticalPosition: 'top'});
   }
   openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
-    const dialogRef = this.dialog.open(DialogWallpaper, {
+    const matDialogRef = this.dialog.open(DialogWallpaper, {
       width: '320px',
       enterAnimationDuration,
       exitAnimationDuration,
       data: this.currentUser
     });
 
-    dialogRef.afterClosed().subscribe((result: any) => {
+    matDialogRef.afterClosed().subscribe((result: any) => {
       if (result !== undefined && result !== '') {
         this.currentUser.currentWallpaperIndex = result;
         this.userService.updateUser(this.currentUser).subscribe((userDto: UserDto) => {
@@ -107,7 +107,7 @@ export class SidenavComponent implements OnInit {
 
 @Component({
   selector: 'dialog-wallpaper',
-  templateUrl: 'dialog.wallpaper.html',
+  templateUrl: 'dialog-wallpaper.html',
   standalone: true,
   imports: [MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent, MatFormField, MatSelect, MatError, MatLabel, MatOption, FormsModule, MatInput, ReactiveFormsModule],
 })

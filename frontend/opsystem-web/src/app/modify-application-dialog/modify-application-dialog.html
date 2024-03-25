@@ -1,0 +1,10 @@
+<mat-dialog-content>
+  <h2>Change {{currentApp.name}}</h2>
+  <mat-form-field>
+    <mat-label>Change name</mat-label>
+    <input matInput [(ngModel)]="formInput">
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button [mat-dialog-close]="formInput" color="accent">Submit</button>
+</mat-dialog-actions>
