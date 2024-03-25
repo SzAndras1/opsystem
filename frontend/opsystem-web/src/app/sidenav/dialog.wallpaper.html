@@ -1,0 +1,42 @@
+<mat-dialog-content>
+  <h2 mat-dialog-title>Select wallpaper</h2>
+  <form>
+    <mat-form-field>
+      <mat-label>Wallpapers</mat-label>
+      <mat-select [(ngModel)]="selectedValueIndex" name="index">
+        @for (wallpaper of currentUser.wallpapers; track wallpaper; let index = $index) {
+          @if (index === currentUser.currentWallpaperIndex) {
+            <mat-option [value]="index" disabled>{{wallpaper}}</mat-option>
+          }
+          @else {
+            <mat-option [value]="index">{{wallpaper}}</mat-option>
+          }
+        }
+      </mat-select>
+    </mat-form-field>
+    <button mat-raised-button [mat-dialog-close]="selectedValueIndex" color="accent">Submit</button>
+  </form>
+  <h2 mat-dialog-title>Add wallpaper</h2>
+  <form [formGroup]="form" (ngSubmit)="addWallpaper()">
+    <mat-form-field>
+      <mat-label>Create wallpaper</mat-label>
+      <input matInput formControlName="name">
+      @if (form.controls['name'].hasError('required')) {
+        <mat-error>You must enter a value</mat-error>
+      }
+      @if (form.controls['name'].hasError('minlength')) {
+        <mat-error>Must be at least 3 characters</mat-error>
+      }
+      @if (form.controls['name'].hasError('maxlength')) {
+        <mat-error>Maximum 10 characters</mat-error>
+      }
+    </mat-form-field>
+    <div>
+      <button type="submit" [disabled]="form.status == 'INVALID'" color="accent" mat-raised-button>Submit</button>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button mat-dialog-close>Close</button>
+</mat-dialog-actions>
+

@@ -40,7 +40,7 @@
       </a>
     </mat-nav-list>
     <mat-nav-list>
-      <button mat-raised-button (click)="wallpaperList.showModal()">Change wallpaper</button>
+      <button mat-raised-button (click)="openDialog('200ms', '200ms')">Change wallpaper</button>
     </mat-nav-list>
     <mat-nav-list>
       <div style="position: fixed;bottom: 25px">Current wallpaper: {{currentUser.wallpapers![currentUser.currentWallpaperIndex!]}}</div>
@@ -65,24 +65,3 @@
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
-
-<dialog #wallpaperList style="z-index: 500">
-  <form method="dialog">
-    <div>
-      <mat-form-field>
-        <mat-label>Wallpapers</mat-label>
-        <mat-select>
-          @for (wallpaper of currentUser.wallpapers; track wallpaper; let index = $index) {
-            @if (index === currentUser.currentWallpaperIndex) {
-              <mat-option [value]="index">{{wallpaper}}</mat-option>
-            }
-            @else {
-              <mat-option [value]="index" disabled>{{wallpaper}}</mat-option>
-            }
-          }
-        </mat-select>
-      </mat-form-field>
-    </div>
-  </form>
-
-</dialog>
