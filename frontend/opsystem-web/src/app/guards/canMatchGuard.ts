@@ -7,5 +7,5 @@ export const canMatchGuardFn: CanMatchFn = () => {
   const router = inject(Router);
   return inject(AuthenticateService)
     .subjectIsLoggedIn
-    .pipe(tap((isLoggedIn) => !isLoggedIn && router.navigate(['create'])))
+    .pipe(tap((isLoggedIn) => !isLoggedIn && router.navigate(['create/user'])))
 }

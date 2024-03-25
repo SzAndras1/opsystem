@@ -7,10 +7,10 @@ import {ApplicationViewComponent} from "./application-view/application-view.comp
 import {ApplicationInstalledComponent} from "./application-installed/application-installed.component";
 
 export const routes: Routes = [
-  {path: 'create-user', component: UserCreateComponent},
+  {path: 'create/user', component: UserCreateComponent},
   {path: 'apps', component: ApplicationListComponent, canMatch: [canMatchGuardFn]},
   {path: 'installed', component: ApplicationInstalledComponent, canMatch: [canMatchGuardFn]},
-  {path: 'create-app', component: ApplicationCreateComponent, canMatch: [canMatchGuardFn]},
+  {path: 'create/app', component: ApplicationCreateComponent, canMatch: [canMatchGuardFn]},
   {path: 'app/:appId', component: ApplicationViewComponent, canMatch: [canMatchGuardFn]},
-  {path: '**', redirectTo: 'apps' || 'create'}
+  {path: '**', redirectTo: 'apps' || 'create/user'}
 ];

@@ -13,14 +13,14 @@
 
     @if (!isLogged) {
       <mat-nav-list>
-        <a mat-list-item routerLink="create-user">
+        <a mat-list-item routerLink="create/user">
           <div>Create an Account</div>
         </a>
        </mat-nav-list>
-    }
+    } @else {
 
     <mat-nav-list>
-      <a mat-list-item routerLink="create-user">
+      <a mat-list-item routerLink="create/user">
         <div>Create a Child</div>
       </a>
     </mat-nav-list>
@@ -35,10 +35,18 @@
       </a>
     </mat-nav-list>
     <mat-nav-list>
-      <a mat-list-item routerLink="create-app">
+      <a mat-list-item routerLink="create/app">
         <div>Create app</div>
       </a>
     </mat-nav-list>
+    <mat-nav-list>
+      <button mat-raised-button (click)="wallpaperList.showModal()">Change wallpaper</button>
+    </mat-nav-list>
+    <mat-nav-list>
+      <div style="position: fixed;bottom: 25px">Current wallpaper: {{currentUser.wallpapers![currentUser.currentWallpaperIndex!]}}</div>
+    </mat-nav-list>
+
+    }
   </mat-sidenav>
 
   <mat-sidenav-content>
@@ -49,7 +57,7 @@
       </button>
       }
       @if (isLogged) {
-        <div>{{username}}'s op system</div>
+        <div>{{currentUser.username}}'s op system</div>
       }
     </mat-toolbar>
     <div class="content">
@@ -57,3 +65,24 @@
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
+
+<dialog #wallpaperList style="z-index: 500">
+  <form method="dialog">
+    <div>
+      <mat-form-field>
+        <mat-label>Wallpapers</mat-label>
+        <mat-select>
+          @for (wallpaper of currentUser.wallpapers; track wallpaper; let index = $index) {
+            @if (index === currentUser.currentWallpaperIndex) {
+              <mat-option [value]="index">{{wallpaper}}</mat-option>
+            }
+            @else {
+              <mat-option [value]="index" disabled>{{wallpaper}}</mat-option>
+            }
+          }
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </form>
+
+</dialog>
