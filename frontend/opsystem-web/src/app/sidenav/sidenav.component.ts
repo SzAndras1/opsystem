@@ -97,7 +97,6 @@ export class DialogWallpaper implements OnInit {
               @Inject(MAT_DIALOG_DATA) public currentUser: UserDto,
               private fb: FormBuilder,
               private wallpaperService: WallpaperService) {
-    matDialogRef.beforeClosed().subscribe(() => matDialogRef.close(this.selectedValueIndex));
   }
 
   ngOnInit(): void {
