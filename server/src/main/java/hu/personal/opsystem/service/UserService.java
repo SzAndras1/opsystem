@@ -7,6 +7,7 @@ import hu.personal.opsystem.model.UserDto;
 import hu.personal.opsystem.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
@@ -50,8 +51,9 @@ public class UserService {
     }
 
 
-    public UserDto deleteUser(UserDto userDto) {
-        User savedUser = userMapper.toEntity(userDto);
+    @Transactional
+    public UserDto deleteUser(UUID userId) {
+        User savedUser = userRepository.findById(userId).orElseThrow(EntityNotFoundException::new);
         userRepository.delete(savedUser);
         return userMapper.toDto(savedUser);
     }

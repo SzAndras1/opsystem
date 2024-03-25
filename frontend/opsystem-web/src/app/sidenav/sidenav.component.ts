@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {RouterLink, RouterOutlet} from "@angular/router";
+import {Router, RouterLink, RouterOutlet} from "@angular/router";
 import {MatSidenav, MatSidenavContainer, MatSidenavContent} from "@angular/material/sidenav";
 import {MatButton, MatButtonModule, MatIconButton} from "@angular/material/button";
 import {MatToolbar, MatToolbarRow} from "@angular/material/toolbar";
@@ -21,6 +21,7 @@ import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} fr
 import {MatInput} from "@angular/material/input";
 import {MatError} from "@angular/material/form-field";
 import {WallpaperService} from "../services/wallpaper.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-sidenav',
@@ -54,7 +55,9 @@ export class SidenavComponent implements OnInit {
   constructor(private authenticateService: AuthenticateService,
               private userService: UserService,
               private wallpaperService: WallpaperService,
-              public dialog: MatDialog) {
+              public dialog: MatDialog,
+              private router: Router,
+              private _snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -63,10 +66,25 @@ export class SidenavComponent implements OnInit {
     this.wallpaperService.wallpaper.subscribe((name: string) => {
       this.currentUser.wallpapers?.push(name);
       this.currentUser.currentWallpaperIndex = this.currentUser.wallpapers!.length - 1;
-      this.userService.updateUser(this.currentUser).subscribe((userDto: UserDto) => console.log(userDto));
+      this.userService.updateUser(this.currentUser).subscribe((userDto: UserDto) => {
+        console.log(userDto);
+        this.openSnackBar(`Successfully changed wallpaper to: ${userDto.wallpapers![userDto.currentWallpaperIndex!]}`, "Close");
+      });
     })
   }
 
+  deleteAccount(): void {
+    this.userService.deleteUser(this.currentUser.id!).subscribe((userDto: UserDto) => {
+      this.authenticateService.currentUser.next({});
+      this.authenticateService.subjectIsLoggedIn.next(false);
+      this.openSnackBar("Successfully deleted your account!", "Close");
+      this.router.navigate(['/create/user']);
+    })
+  }
+
+  openSnackBar(message: string, buttonLabel: string): void {
+    this._snackBar.open(message, buttonLabel, {duration: 3 * 1000, verticalPosition: 'top'});
+  }
   openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
     const dialogRef = this.dialog.open(DialogWallpaper, {
       width: '320px',
@@ -75,10 +93,14 @@ export class SidenavComponent implements OnInit {
       data: this.currentUser
     });
 
-    dialogRef.afterClosed().subscribe((result: number) => {
-      console.log('The dialog was closed');
-      this.currentUser.currentWallpaperIndex = result;
-      this.userService.updateUser(this.currentUser).subscribe((userDto: UserDto) => console.log(userDto));
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result !== undefined && result !== '') {
+        this.currentUser.currentWallpaperIndex = result;
+        this.userService.updateUser(this.currentUser).subscribe((userDto: UserDto) => {
+          console.log(userDto);
+          this.openSnackBar(`Successfully changed wallpaper to: ${userDto.wallpapers![userDto.currentWallpaperIndex!]}`, "Close");
+        });
+      }
     });
   }
 }

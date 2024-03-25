@@ -40,10 +40,15 @@
       </a>
     </mat-nav-list>
     <mat-nav-list>
-      <button mat-raised-button (click)="openDialog('200ms', '200ms')">Change wallpaper</button>
+      <a mat-list-item (click)="openDialog('200ms', '200ms')">Change wallpaper</a>
     </mat-nav-list>
     <mat-nav-list>
-      <div style="position: fixed;bottom: 25px">Current wallpaper: {{currentUser.wallpapers![currentUser.currentWallpaperIndex!]}}</div>
+      <a mat-list-item>
+        <div (click)="deleteAccount()">Delete account</div>
+      </a>
+    </mat-nav-list>
+    <mat-nav-list class="wallpaper-name">
+      <div>Current wallpaper: {{currentUser.wallpapers![currentUser.currentWallpaperIndex!]}}</div>
     </mat-nav-list>
 
     }

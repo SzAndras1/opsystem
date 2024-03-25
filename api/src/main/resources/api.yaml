@@ -66,17 +66,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserDto'
+
+  /api/v1/users/{userId}:
     delete:
       tags:
         - user
       operationId: deleteUser
       description: Delete a User
-      requestBody:
-        content:
-          application/json;charset=UTF-8:
-            schema:
-              $ref: '#/components/schemas/UserDto'
-        required: true
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: Id of the User
+          schema:
+            type: string
+            format: uuid
       responses:
         200:
           description: The deleted User

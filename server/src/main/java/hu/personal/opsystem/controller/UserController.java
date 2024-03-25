@@ -57,7 +57,7 @@ public class UserController implements UserApi {
     }
 
     @Override
-    public ResponseEntity<UserDto> deleteUser(UserDto userDto) {
-        return ResponseEntity.ok(userService.deleteUser(userDto));
+    public ResponseEntity<UserDto> deleteUser(UUID userId) {
+        return ResponseEntity.ok(userService.deleteUser(userId));
     }
 }

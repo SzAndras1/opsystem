@@ -6,6 +6,7 @@ import {MatInput} from "@angular/material/input";
 import {MatButton} from "@angular/material/button";
 import {AuthenticateService} from "../services/authenticate.service";
 import {Router} from "@angular/router";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-user-create',
@@ -31,7 +32,8 @@ export class UserCreateComponent implements OnInit {
     private userService: UserService,
     private authenticateService: AuthenticateService,
     private fb: FormBuilder,
-    private router: Router) {
+    private router: Router,
+    private _snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -41,11 +43,14 @@ export class UserCreateComponent implements OnInit {
       username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]]
     });
   }
-
+  openSnackBar(message: string, buttonLabel: string): void {
+    this._snackBar.open(message, buttonLabel, {duration: 3 * 1000, verticalPosition: 'top'});
+  }
   createUser(): void {
     if (this.isLogged) {
       this.userService.createChild(this.parentId, this.userForm.value as CreateUserDto).subscribe((userDto: UserDto) => {
         console.log(userDto);
+        this.openSnackBar(`Successfully created ${userDto.username} child user!`, "Close");
         this.router.navigate(['/apps']);
       });
     } else {
