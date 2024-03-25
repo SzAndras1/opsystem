@@ -4,12 +4,9 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
-    <changeSet id="table_application_seq_create" author="andras.szabo">
-        <createSequence cycle="false" incrementBy="1" sequenceName="SEQ_APPLICATION_TABLE" startValue="5"/>
-    </changeSet>
     <changeSet id="create_application_table" author="andras.szabo">
         <createTable tableName="application">
-            <column name="id" type="bigint" defaultValueComputed="nextval('SEQ_APPLICATION_TABLE')">
+            <column name="id" type="UUID">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="name" type="varchar(255)"/>

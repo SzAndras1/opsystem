@@ -12,6 +12,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @RestController
@@ -41,12 +42,12 @@ public class UserController implements UserApi {
     }
 
     @Override
-    public ResponseEntity<UserDto> install(Long appId, UserDto userDto) {
+    public ResponseEntity<UserDto> install(UUID appId, UserDto userDto) {
         return ResponseEntity.ok(userAppService.connectUserWithApp(userDto, appId));
     }
 
     @Override
-    public ResponseEntity<UserDto> createChild(Long appId, CreateUserDto createUserDto) {
+    public ResponseEntity<UserDto> createChild(UUID appId, CreateUserDto createUserDto) {
         return ResponseEntity.ok(userService.createChild(createUserDto, appId));
     }
 

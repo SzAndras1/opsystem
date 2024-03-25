@@ -39,7 +39,7 @@ export class ApplicationInstalledComponent implements OnInit {
     });
   }
 
-  viewApp(appId: number): void {
+  viewApp(appId: string): void {
     this.router.navigate([`/app/${appId}`])
   }
 }

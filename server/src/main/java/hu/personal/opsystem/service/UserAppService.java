@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
@@ -20,7 +21,7 @@ public class UserAppService {
 
     private final UserMapper userMapper;
 
-    public UserDto connectUserWithApp(UserDto userDto, Long appId) {
+    public UserDto connectUserWithApp(UserDto userDto, UUID appId) {
         User user = userRepository.findById(userDto.getId()).orElseThrow(EntityNotFoundException::new);
         Application application = applicationRepository.findById(appId).orElseThrow(EntityNotFoundException::new);
 

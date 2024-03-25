@@ -53,7 +53,7 @@ export class ApplicationListComponent implements OnInit {
     });
   }
 
-  installApp(index: number): void {
+  installApp(index: string): void {
     this.userService.install(index, this.currentUser).subscribe((userDto: UserDto) => {
       console.log(userDto);
       this.authenticateService.currentUser.next(userDto);
@@ -61,7 +61,7 @@ export class ApplicationListComponent implements OnInit {
     })
   }
 
-  viewApp(appId: number): void {
+  viewApp(appId: string): void {
     this.router.navigate([`/app/${appId}`])
   }
 

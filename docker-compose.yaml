@@ -1,0 +1,14 @@
+services:
+
+  frontend:
+    build: ./frontend/opsystem-web
+    container_name: frontend
+    ports:
+      - '80:4200'
+    volumes:
+      - angular:/app/src/.angular
+      - npm-modules:/app/src/node_modules
+
+volumes:
+  angular:
+  npm-modules:

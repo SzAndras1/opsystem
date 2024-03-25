@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityExistsException;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -30,7 +31,7 @@ public class ApplicationService {
         return applicationMapper.toDto(applicationRepository.save(savedApplication));
     }
 
-    public ApplicationDto getApplication(Long appId) {
+    public ApplicationDto getApplication(UUID appId) {
         return applicationMapper.toDto(applicationRepository.findById(appId).orElseThrow(EntityExistsException::new));
     }
 }

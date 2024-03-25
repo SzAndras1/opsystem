@@ -4,9 +4,12 @@ import hu.personal.opsystem.model.UserDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.UUID;
 
 @Data
 @NoArgsConstructor
@@ -15,9 +18,10 @@ import java.util.List;
 @Table(name = "user_table")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_USER_TABLE")
-    @SequenceGenerator(name = "SEQ_USER_TABLE", sequenceName = "SEQ_USER_TABLE", allocationSize = 1, initialValue = 6)
-    private Long id;
+    @GeneratedValue(generator = "uuid-hibernate-generator")
+    @GenericGenerator(name = "uuid-hibernate-generator", strategy = "org.hibernate.id.UUIDGenerator")
+    @Type(type = "org.hibernate.type.UUIDCharType")
+    private UUID id;
 
     private String username;
 

@@ -25,7 +25,7 @@ export class UserCreateComponent implements OnInit {
 
   userForm!: FormGroup;
   isLogged = false;
-  parentId: number = 0;
+  parentId: string = '';
 
   constructor(
     private userService: UserService,

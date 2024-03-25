@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -32,7 +33,7 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
-    public UserDto createChild(CreateUserDto createUserDto, Long userId) {
+    public UserDto createChild(CreateUserDto createUserDto, UUID userId) {
         User parentUser = userRepository.findById(userId).orElseThrow(EntityNotFoundException::new);
         if (parentUser.getRole() != UserDto.RoleEnum.PARENT) {
             throw new IllegalArgumentException();

@@ -10,6 +10,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @RestController
@@ -37,7 +38,7 @@ public class ApplicationController implements ApplicationApi {
     }
 
     @Override
-    public ResponseEntity<ApplicationDto> getApplication(Long appId) {
+    public ResponseEntity<ApplicationDto> getApplication(UUID appId) {
         return ResponseEntity.ok(applicationService.getApplication(appId));
     }
 }
