@@ -243,6 +243,34 @@ paths:
               schema:
                   $ref: '#/components/schemas/ApplicationDto'
 
+  /api/v1/applications/populate/json:
+    post:
+      tags:
+        - application
+      operationId: populateDatabaseFromJson
+      responses:
+        200:
+          description: Array of ApplicationDtos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ApplicationDto'
+
+  /api/v1/applications/populate/sql:
+    post:
+      tags:
+        - application
+      operationId: populateDatabaseFromSql
+      responses:
+        200:
+          description: Array of ApplicationDtos
+          content:
+            application/json:
+              schema:
+                type: string
+
 components:
   schemas:
     UserDto:
