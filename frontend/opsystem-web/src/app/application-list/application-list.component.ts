@@ -35,6 +35,10 @@ export class ApplicationListComponent implements OnInit {
 
   ngOnInit(): void {
     this.authenticateService.currentUser.subscribe((userDto: UserDto) => this.currentUser = userDto);
+    this.getEveryApp();
+  }
+
+  getEveryApp(): void {
     this.applicationService.getAllApplication().subscribe((apps: ApplicationDto[]) => {
       this.applications = apps;
       const ids = this.currentUser?.applications?.map(i => i.id);
@@ -108,6 +112,17 @@ export class ApplicationListComponent implements OnInit {
           });
         });
       }
+    });
+  }
+
+  createApp(): void {
+    this.router.navigate(["/create/app"]);
+  }
+
+  populateDb(): void {
+    this.applicationService.populateDatabaseFromJson().subscribe((applicationDtos: ApplicationDto[]) => {
+      console.log(applicationDtos);
+      this.getEveryApp();
     });
   }
 }

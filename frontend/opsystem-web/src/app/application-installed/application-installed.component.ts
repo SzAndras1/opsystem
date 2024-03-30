@@ -77,4 +77,8 @@ export class ApplicationInstalledComponent implements OnInit {
       }
     });
   }
+
+  browseApps(): void {
+    this.router.navigate(["/apps"]);
+  }
 }

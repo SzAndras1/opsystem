@@ -11,5 +11,16 @@
       <mat-icon class="modify-button" fontIcon="settings" (click)="openDialog('200ms', '200ms', index)"></mat-icon>
     </mat-card>
   }
+  @empty {
+    <mat-card class="app-card">
+      <mat-card-content>
+        <div class="text-center">
+          <p>No applications</p>
+          <p>installed at the moment.</p>
+          <button mat-raised-button (click)="browseApps()" color="accent">Browse Apps</button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  }
 </div>
 

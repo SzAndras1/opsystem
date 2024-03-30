@@ -16,5 +16,12 @@
       <mat-icon class="modify-button" fontIcon="settings" (click)="openDialog('200ms', '200ms', index)"></mat-icon>
     </mat-card>
   }
+  <mat-card class="app-card middle-button-card">
+      <button class="create-button" mat-raised-button color="accent" (click)="createApp()">Create App</button>
+  </mat-card>
+
+  <mat-card class="app-card middle-button-card">
+    <button class="create-button" mat-raised-button color="accent" (click)="populateDb()">Add Sample Apps</button>
+  </mat-card>
 </div>
 
